@@ -27,11 +27,18 @@ export default class Load extends Module {
     });
 
     this.load.on('loaded', (transition, oldContainer, newContainer) => {
+      this.load.on('loaded', (transition, oldContainer, newContainer) => {
+        loadExternalScript(
+          'https://cdn.jsdelivr.net/gh/radardesign/cateringmax-carousel@0e3c10f/script.js',
+          () => {
+            if (typeof window.initEventsCarousel === 'function') {
+              window.initEventsCarousel();
+            }
+          }
+        );
+      });
       this.call('destroy', oldContainer, 'app');
       this.call('update', newContainer, 'app');
-      if (typeof window.initEventsCarousel === 'function') {
-        window.initEventsCarousel();
-      }
       this.call('close', null, 'Menu');
 
       switch (transition) {
