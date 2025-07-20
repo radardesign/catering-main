@@ -27,15 +27,8 @@ export default class Load extends Module {
   }
 
   init() {
-    this.load = new modularLoad({
-      enterDelay: 500,
-      transitions: {
-        [Load.TRANSITION_ABOUT]: {},
-        [Load.TRANSITION_BLOCK]: {},
-        [Load.TRANSITION_REVIEWS]: {},
-        [Load.TRANSITION_BOXES]: {}
-      }
-    });
+    // modularLoad отключен
+    }
 
     this.load.on('loaded', (transition, oldContainer, newContainer) => {
       this.call('destroy', oldContainer, 'app');
