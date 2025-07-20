@@ -1,0 +1,55 @@
+{
+  "name": "catering",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "start": "node --no-warnings build/watch.js",
+    "build": "node --no-warnings build/build.js",
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickxsy/catering.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickxsy/catering/issues"
+  },
+  "homepage": "https://github.com/nickxsy/catering#readme",
+  "description": "",
+  "dependencies": {
+    "focus-trap": "^7.6.4",
+    "gsap": "^3.12.7",
+    "locomotive-scroll": "^5.0.0-beta.21",
+    "modujs": "^1.4.2",
+    "modularload": "^1.2.8",
+    "swiper": "^11.2.6"
+  },
+  "overrides": {
+    "browser-sync": {
+      "ua-parser-js": "~1.0.33"
+    }
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "browser-sync": "^3.0.3",
+    "common-path": "^1.0.1",
+    "concat": "^1.0.3",
+    "esbuild": "^0.25.0",
+    "kleur": "^4.1.5",
+    "node-notifier": "^10.0.1",
+    "postcss": "^8.5.3",
+    "prettier": "^3.5.3",
+    "purgecss": "^7.0.2",
+    "sass": "^1.79.5",
+    "svg-mixer": "^2.3.14",
+    "tiny-glob": "^0.2.9"
+  }
+}

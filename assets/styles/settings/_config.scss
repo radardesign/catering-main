@@ -1,0 +1,45 @@
+// ==========================================================================
+// Settings / Config
+// ==========================================================================
+
+// Context
+// =============================================================================
+
+// The current stylesheet context. Available values: frontend, editor.
+$context: frontend !default;
+
+// Path is relative to the stylesheets directory.
+$assets-path: '../' !default;
+
+// Typography
+// =============================================================================
+
+// Base
+$font-size: 16px;
+$line-height: math.div(24px, $font-size);
+$font-color: colorCode(darkest);
+
+// Weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// Transition defaults
+// =============================================================================
+$speed: t(normal);
+$easing: ease('power2.out');
+
+// Spacing Units
+// =============================================================================
+$unit: 60px;
+$unit-small: 20px;
+$vw-viewport: 1440;
+
+// Container
+// ==========================================================================
+$padding: $unit;
+
+// Grid
+// ==========================================================================
+$base-column-nb: 12;

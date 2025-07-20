@@ -1,0 +1,24 @@
+.c-card_item {
+  @include wfDesignMode {
+    opacity: 0;
+    transform: translate3d(0, 4rem, 0);
+    transition:
+      opacity 500ms ease,
+      transform 500ms ease;
+  }
+
+  @media (min-width: 992px) {
+    html.is-ready .c-card_list.is-inview & {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      transition-delay: calc(var(--index) * 150ms);
+    }
+  }
+
+  @media (max-width: 991px) {
+    html.is-ready &.is-inview {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}

@@ -1,0 +1,70 @@
+// ==========================================================================
+// Elements / Document
+// ==========================================================================
+
+//
+// Simple page-level setup.
+//
+// 1. Includes fonts
+// 2. Ensure the page always fills at least the entire height of the viewport.
+// 3. Set the default `font-size` and `line-height` for the entire project,
+//    sourced from our default variables.
+
+// @include font-faces($font-faces, $font-dir); // [1]
+
+html {
+  min-height: 100%; // [2]
+  // line-height: $line-height; // [3]
+  // font-family: ff('sans');
+  // color: $font-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // @media (max-width: $to-sm) {
+  //   font-size: $font-size - 2px;
+  // }
+
+  // @media (min-width: $from-sm) and (max-width: $to-lg) {
+  //   font-size: $font-size - 1px;
+  // }
+
+  // @media (min-width: $from-lg) and (max-width: $to-2xl) {
+  //   font-size: $font-size;
+  // }
+
+  // @media (min-width: $from-2xl) and (max-width: $to-3xl) {
+  //   font-size: $font-size + 1px;
+  // }
+
+  // @media (min-width: $from-3xl) {
+  //   font-size: $font-size + 2px;
+  // }
+}
+
+::-moz-selection {
+  background-color: rgba($color: #fff, $alpha: 0.1);
+  text-shadow: none;
+  box-shadow: none;
+}
+
+::selection {
+  background-color: rgba($color: #fff, $alpha: 0.1);
+  text-shadow: none;
+  box-shadow: none;
+}
+
+img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  user-select: none;
+}
+
+// a {
+//   color: $color-link;
+
+//   @include u-hocus {
+//     color: $color-link-hover;
+//   }
+// }

@@ -1,0 +1,213 @@
+// ==========================================================================
+// Tools / Functions
+// ==========================================================================
+
+// Check if the given value is a number in pixel
+//
+// @param  {Number} $number - The value to check
+// @return {Boolean}
+
+@function is-pixel-number($number) {
+  @return type-of($number) == number and unit($number) == 'px';
+}
+
+// Converts the given pixel value to its EM quivalent.
+//
+// @param  {Number} $size                     - The pixel value to convert.
+// @param  {Number} $base [$font-size] - The assumed base font size.
+// @return {Number} Scalable pixel value in EMs.
+
+@function em($size, $base: $font-size) {
+  @if not is-pixel-number($size) {
+    @error "`#{$size}` needs to be a number in pixel.";
+  }
+
+  @if not is-pixel-number($base) {
+    @error "`#{$base}` needs to be a number in pixel.";
+  }
+
+  @return math.div($size, $base) * 1em;
+}
+
+// Converts the given pixel value to its REM quivalent.
+//
+// @param  {Number} $size                     - The pixel value to convert.
+// @param  {Number} $base [$font-size] - The assumed base font size.
+// @return {Number} Scalable pixel value in REMs.
+
+@function rem($size, $base: $font-size) {
+  @if not is-pixel-number($size) {
+    @error "`#{$size}` needs to be a number in pixel.";
+  }
+
+  @if not is-pixel-number($base) {
+    @error "`#{$base}` needs to be a number in pixel.";
+  }
+
+  @return math.div($size, $base) * 1rem;
+}
+
+// Checks if a list contains a value(s).
+//
+// @link   https://github.com/thoughtbot/bourbon/blob/master/core/bourbon/validators/_contains.scss
+// @param  {List} $list   - The list to check against.
+// @param  {List} $values - A single value or list of values to check for.
+// @return {Boolean}
+// @access private
+
+@function list-contains($list, $values...) {
+  @each $value in $values {
+    @if type-of(index($list, $value)) != 'number' {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+// Resolve whether a rule is important or not.
+//
+// @param  {Boolean}     $flag - Whether a rule is important (TRUE) or not (FALSE).
+// @return {String|Null} Returns `!important` or NULL.
+
+@function important($flag: false) {
+  @if ($flag == true) {
+    @return !important;
+  } @else if ($important == false) {
+    @return null;
+  } @else {
+    @error "`#{$flag}` needs to be `true` or `false`.";
+  }
+}
+
+// Determine if the current context is for a WYSIWYG editor.
+//
+// @requires {String} $context - The global context of the stylesheet.
+// @return   {Boolean} If the $context is set to "editor".
+
+@function is-editor() {
+  @return ('editor' == $context);
+}
+
+// Determine if the current context is for the front-end.
+//
+// @requires {String} $context - The global context of the stylesheet.
+// @return   {Boolean} If the $context is set to "frontend".
+
+@function is-frontend() {
+  @return ('frontend' == $context);
+}
+
+$context: 'frontend' !default;
+
+// Returns calculation of a percentage of the grid cell width
+// with optional inset of grid gutter.
+//
+// ```scss
+// .c-box {
+//     width: grid-space(6/12);
+//     margin-left: grid-space(1/12, 1);
+// }
+// ```
+//
+// @param  {number} $percentage - The percentage spacer
+// @param  {number} $inset      - The grid gutter inset
+// @return {function<number>}
+@function grid-space($percentage, $inset: 0) {
+  @return calc(
+    #{$percentage} * (#{vw(100)} - 2 * var(--grid-margin, 0px)) - (1 - #{$percentage}) *
+      var(--grid-gutter, 0px) + #{$inset} * var(--grid-gutter, 0px)
+  );
+}
+
+// Returns calculation of a percentage of the viewport small height.
+//
+// ```scss
+// .c-box {
+//     height: svh(100);
+// }
+// ```
+//
+// @param  {number} $number - The percentage number
+// @return {function<number>} in svh
+@function svh($number) {
+  @return calc(#{$number} * var(--svh, 1svh));
+}
+
+// Returns calculation of a percentage of the viewport large height.
+//
+// ```scss
+// .c-box {
+//     height: lvh(100);
+// }
+// ```
+//
+// @param  {number} $number - The percentage number
+// @return {function<number>} in lvh
+@function lvh($number) {
+  @return calc(#{$number} * var(--lvh, 1lvh));
+}
+
+// Returns calculation of a percentage of the viewport dynamic height.
+//
+// ```scss
+// .c-box {
+//     height: dvh(100);
+// }
+// ```
+//
+// @param  {number} $number - The percentage number
+// @return {function<number>} in dvh
+@function dvh($number) {
+  @return calc(#{$number} * var(--dvh, 1dvh));
+}
+
+// Returns calculation of a percentage of the viewport width.
+//
+// ```scss
+// .c-box {
+//     width: vw(100);
+// }
+// ```
+//
+// @param  {number} $number - The percentage number
+// @return {function<number>} in vw
+
+@function vw($number) {
+  @return calc(#{$number} * var(--vw, 1vw));
+}
+
+@function clamp-with-max($min, $size, $max) {
+  $vw-context: $vw-viewport * 0.01;
+  @return clamp(#{$min}, calc(#{$size} / #{$vw-context} * 1vw), #{$max});
+}
+
+@function size-clamp($size) {
+  @return clamp-with-max(
+    calc(#{rem(1px)} * var(--spacing-#{$size}-mobile)),
+    var(--spacing-#{$size}-desktop),
+    calc(#{rem(1px)} * var(--spacing-#{$size}-desktop))
+  );
+}
+
+// Returns clamp of calculated preferred responsive font size
+// within a font size and breakpoint range.
+//
+// ```scss
+// .c-heading.-h1 {
+//     font-size: responsive-value(30px, 60px, 1800);
+// }
+//
+// .c-heading.-h2 {
+//     font-size: responsive-value(20px, 40px, $from-xl);
+// }
+// ```
+//
+// @param  {number} $min-size   - Minimum font size in pixels.
+// @param  {number} $max-size   - Maximum font size in pixels.
+// @param  {number} $breakpoint - Maximum breakpoint.
+// @return {function<number, function<number>, number>}
+@function responsive-value($min-size, $max-size, $breakpoint) {
+  $delta: math.div($max-size, $breakpoint);
+  @return clamp($min-size, calc(#{strip-unit($delta)} * #{vw(100)}), $max-size);
+}

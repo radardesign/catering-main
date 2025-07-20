@@ -1,0 +1,24 @@
+// ==========================================================================
+// Components / Events
+// ==========================================================================
+
+.c-events_item {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.8;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    z-index: 1;
+  }
+}
+
+.c-events_item-wrapper {
+  &:not(:last-child) {
+    margin-right: rem(8px);
+  }
+}

@@ -1,0 +1,95 @@
+// ==========================================================================
+// Settings / Config / Breakpoints
+// ==========================================================================
+
+// Breakpoints
+// ==========================================================================
+
+$breakpoints: (
+  '2xs': 340px,
+  'xs': 500px,
+  'sm': 700px,
+  'md': 1000px,
+  'lg': 1200px,
+  'xl': 1400px,
+  '2xl': 1600px,
+  '3xl': 1800px,
+  '4xl': 2000px,
+  '5xl': 2400px
+);
+
+// Functions
+// ==========================================================================
+
+// Creates a min-width or max-width media query expression.
+//
+// @param  {string} $breakpoint The breakpoint.
+// @param  {string} $type       Either "min" or "max".
+// @return {string}
+
+@function mq($breakpoint, $type: 'min') {
+  @if not map-has-key($breakpoints, $breakpoint) {
+    @warn "Unknown media query breakpoint: `#{$breakpoint}`";
+  }
+
+  $value: map-get($breakpoints, $breakpoint);
+
+  @if ($type == 'min') {
+    @return '(min-width: #{$value})';
+  }
+  @if ($type == 'max') {
+    @return '(max-width: #{$value - 1px})';
+  }
+
+  @error "Unknown media query type: #{$type}";
+}
+
+// Creates a min-width media query expression.
+//
+// @param  {string} $breakpoint The breakpoint.
+// @return {string}
+
+@function mq-min($breakpoint) {
+  @return mq($breakpoint, 'min');
+}
+
+// Creates a max-width media query expression.
+//
+// @param  {string} $breakpoint The breakpoint.
+// @return {string}
+
+@function mq-max($breakpoint) {
+  @return mq($breakpoint, 'max');
+}
+
+// Creates a min-width and max-width media query expression.
+//
+// @param  {string} $from  The min-width breakpoint.
+// @param  {string} $until The max-width breakpoint.
+// @return {string}
+
+@function mq-between($breakpointMin, $breakpointMax) {
+  @return '#{mq-min($breakpointMin)} and #{mq-max($breakpointMax)}';
+}
+
+// Legacy
+// ==========================================================================
+
+$from-xs: map-get($breakpoints, 'xs') !default;
+$to-xs: map-get($breakpoints, 'xs') - 1 !default;
+$from-sm: map-get($breakpoints, 'sm') !default;
+$to-sm: map-get($breakpoints, 'sm') - 1 !default;
+$from-md: map-get($breakpoints, 'md') !default;
+$to-md: map-get($breakpoints, 'md') - 1 !default;
+$from-lg: map-get($breakpoints, 'lg') !default;
+$to-lg: map-get($breakpoints, 'lg') - 1 !default;
+$from-xl: map-get($breakpoints, 'xl') !default;
+$to-xl: map-get($breakpoints, 'xl') - 1 !default;
+$from-2xl: map-get($breakpoints, '2xl') !default;
+$to-2xl: map-get($breakpoints, '2xl') - 1 !default;
+$from-3xl: map-get($breakpoints, '3xl') !default;
+$to-3xl: map-get($breakpoints, '3xl') - 1 !default;
+$from-4xl: map-get($breakpoints, '4xl') !default;
+$to-4xl: map-get($breakpoints, '4xl') - 1 !default;
+$from-5xl: map-get($breakpoints, '5xl') !default;
+$to-5xl: map-get($breakpoints, '5xl') - 1 !default;

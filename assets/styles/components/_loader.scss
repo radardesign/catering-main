@@ -1,0 +1,14 @@
+// ==========================================================================
+// Components / Loader
+// ==========================================================================
+
+.c-loader {
+  @include wfDesignMode {
+    display: none !important;
+  }
+
+  html.is-ready & {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

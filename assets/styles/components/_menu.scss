@@ -1,0 +1,42 @@
+// ==========================================================================
+// Components / Menu
+// ==========================================================================
+
+.c-menu {
+  @include wfProdMode {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition:
+      visibility 300ms ease,
+      opacity 300ms ease;
+  }
+
+  html.is-ready.has-menu-open & {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.c-menu_inner {
+  @include wfProdMode {
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  html.is-ready.has-menu-open & {
+    opacity: 1;
+  }
+}
+
+.c-menu_bg {
+  @include wfProdMode {
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  html.is-ready.has-menu-open & {
+    opacity: 1;
+  }
+}

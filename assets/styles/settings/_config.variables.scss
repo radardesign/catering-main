@@ -1,0 +1,19 @@
+// ==========================================================================
+// Settings / Config / CSS VARS
+// ==========================================================================
+
+:root {
+  // Grid
+  --grid-columns: 4;
+  --grid-gutter: #{rem(10px)};
+  --grid-margin: #{rem(10px)};
+
+  // Container
+  --container-width: calc(100% - 2 * var(--grid-margin));
+
+  @media (min-width: $from-sm) {
+    --grid-columns: #{$base-column-nb};
+    --grid-gutter: #{rem(16px)};
+    --grid-margin: #{rem(20px)};
+  }
+}

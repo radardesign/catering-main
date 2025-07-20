@@ -1,0 +1,46 @@
+// ==========================================================================
+// Components / Modal Form
+// ==========================================================================
+
+.c-modal-form {
+  @include wfProdMode {
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      visibility 300ms ease,
+      opacity 300ms ease;
+  }
+
+  html.is-ready &.has-modal-form-open {
+    // visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.c-modal-form_inner {
+  @include wfProdMode {
+    opacity: 0;
+    transform: translate3d(0, 60px, 0);
+    transition:
+      opacity 300ms ease,
+      transform 600ms ease;
+  }
+
+  html.is-ready .c-modal-form.has-modal-form-open & {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.c-modal-form_bg {
+  @include wfProdMode {
+    opacity: 0;
+
+    transition: opacity 300ms ease;
+  }
+
+  html.is-ready .c-modal-form.has-modal-form-open & {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,15 @@
+// ==========================================================================
+// Components / Header
+// ==========================================================================
+
+.c-header_nav {
+  @media (max-width: 1200px) {
+    display: none;
+  }
+}
+
+.c-header_button-menu {
+  @media (min-width: 1200px) {
+    display: none;
+  }
+}

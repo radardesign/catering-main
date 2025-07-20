@@ -1,0 +1,38 @@
+// ==========================================================================
+// Settings / Config / Speeds
+// ==========================================================================
+
+// Speeds
+// ==========================================================================
+
+$speeds: (
+  fastest: 0.1s,
+  faster: 0.15s,
+  fast: 0.25s,
+  normal: 0.3s,
+  slow: 0.5s,
+  slower: 0.75s,
+  slowest: 1s
+);
+
+// Function
+// ==========================================================================
+
+// Returns timing.
+//
+// ```scss
+// .c-box {
+//     transition-duration: speed(slow);
+// }
+// ```
+//
+// @param  {string} $key - The speed key in $speeds.
+// @return {duration}
+
+@function speed($key: 'normal') {
+  @if not map-has-key($speeds, $key) {
+    @error "Unknown '#{$key}' in $speeds.";
+  }
+
+  @return map-get($speeds, $key);
+}

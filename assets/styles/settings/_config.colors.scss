@@ -1,0 +1,61 @@
+@use 'sass:color';
+
+// ==========================================================================
+// Settings / Config / Colors
+// ==========================================================================
+
+// Palette
+// ==========================================================================
+
+$colors: (
+  primary: #3297fd,
+  lightest: #ffffff,
+  darkest: #000000
+);
+
+// Function
+// ==========================================================================
+
+// Returns color code.
+//
+// ```scss
+// .c-box {
+//     color: colorCode(primary);
+// }
+// ```
+//
+// @param  {string} $key - The color key in $colors.
+// @param  {number} $alpha - The alpha for the color value.
+// @return {color}
+
+@function colorCode($key, $alpha: 1) {
+  @if not map-has-key($colors, $key) {
+    @error "Unknown '#{$key}' in $colors.";
+  }
+
+  @if ($alpha < 0 or $alpha > 1) {
+    @error "Alpha '#{$alpha}' must be in range [0, 1].";
+  }
+
+  $color: map-get($colors, $key);
+
+  @return rgba($color, $alpha);
+}
+
+// Specifics
+// ==========================================================================
+
+// Link
+$color-link: colorCode(primary);
+$color-link-focus: colorCode(primary);
+$color-link-hover: color.adjust(colorCode(primary), $lightness: -10%);
+
+// Selection
+$color-selection-text: colorCode(darkest);
+$color-selection-background: colorCode(lightest);
+
+// Socials
+$color-facebook: #3b5998;
+$color-instagram: #e1306c;
+$color-youtube: #cd201f;
+$color-twitter: #1da1f2;

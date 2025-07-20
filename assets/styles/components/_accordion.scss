@@ -1,0 +1,41 @@
+// ==========================================================================
+// Components / Accordion
+// ==========================================================================
+
+.c-accordion_item {
+  transition: background-color 300ms ease;
+  @media (hover: hover) {
+    &:hover:not(.-active) {
+      background-color: rgba($color: #fff, $alpha: 0.1);
+    }
+  }
+}
+
+.c-accordion_wrapper {
+  @include wfProdMode {
+    height: 0px;
+  }
+}
+
+.c-accordions_arrow {
+  .c-accordion_item.-active & {
+    transform: rotate(180deg);
+  }
+}
+
+.c-accordion_content {
+  & *:first-child {
+    margin-top: 0px;
+  }
+
+  ol {
+    & > li {
+      counter-increment: li;
+      position: relative;
+
+      &::before {
+        content: counters(li, '.') '. ';
+      }
+    }
+  }
+}
